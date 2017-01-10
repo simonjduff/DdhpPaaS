@@ -3,7 +3,13 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "hostingPlanName": {
-            "value": null
+            "value": "DdhpTestPlan"
+        },
+        "storageName": {
+            "value": "ddhpteststorage"
+        },
+        "functionName": {
+            "value": "DdhpTestFunctions"
         }
     }
 }
