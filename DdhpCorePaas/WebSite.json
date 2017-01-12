@@ -6,6 +6,22 @@
       "type": "string",
       "minLength": 1
     },
+    "functionHostingPlanName": {
+      "type": "string",
+      "minLength": 1
+    },
+    "websiteName": {
+      "type": "string",
+      "minLength": 1
+    },
+    "websiteRepo": {
+      "type": "string",
+      "minLength": 1
+    },
+    "websiteBranch": {
+      "type": "string",
+      "minLength": 1
+    },
     "skuName": {
       "type": "string",
       "defaultValue": "F1",
@@ -40,8 +56,8 @@
     },
     "functionBranch": {
       "type": "string",
-      "minLength": 1  
-    } 
+      "minLength": 1
+    }
   },
   "variables": {
     "webSiteName": "[concat('webSite', uniqueString(resourceGroup().id))]"
@@ -50,13 +66,47 @@
     {
       "type": "Microsoft.Web/serverfarms",
       "apiVersion": "2015-04-01",
-      "name": "[parameters('hostingPlanName')]",
+      "name": "[parameters('functionHostingPlanName')]",
       "location": "[resourceGroup().location]",
       "properties": {
-        "name": "[parameters('hostingPlanName')]",
+        "name": "[parameters('functionHostingPlanName')]",
         "computeMode": "Dynamic",
         "sku": "Dynamic"
       }
+    },
+    {
+      "apiVersion": "2015-08-01",
+      "name": "[parameters('hostingPlanName')]",
+      "type": "Microsoft.Web/serverfarms",
+      "location": "[resourceGroup().location]",
+      "tags": {
+        "displayName": "HostingPlan"
+      },
+      "sku": {
+        "name": "[parameters('skuName')]",
+        "capacity": "[parameters('skuCapacity')]"
+      },
+      "properties": {
+        "name": "[parameters('hostingPlanName')]"
+      },
+      "resources": [
+        {
+          "type": "Microsoft.Web/sites",
+          "name": "[parameters('websiteName')]",
+          "apiVersion": "2016-03-01",
+          "location": "[resourceGroup().location]",
+          "tags": {
+          },
+          "properties": {
+            "name": "[parameters('websiteName')]",
+            "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('hostingPlanName'))]",
+            "hostingEnvironment": "",
+            "RepoUrl": "[parameters('websiteRepo')]",
+            "branch": "[parameters('websiteBranch')]"
+          },
+          "dependsOn": [ "[resourceId('Microsoft.Web/serverfarms', parameters('hostingPlanName'))]" ] 
+        }
+      ] 
     },
     {
       "type": "Microsoft.Storage/storageAccounts",
@@ -76,6 +126,7 @@
       "dependsOn": [ "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageName'))]" ],
       "properties": {
         "name": "[parameters('functionName')]",
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('functionHostingPlanName'))]",
         "siteConfig": {
           "appSettings": [
             {
@@ -119,7 +170,7 @@
             "branch": "[parameters('functionBranch')]"
           }
         }
-      ] 
+      ]
     }
   ]
 }
