@@ -102,10 +102,17 @@
             "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('hostingPlanName'))]",
             "hostingEnvironment": "",
             "RepoUrl": "[parameters('websiteRepo')]",
-            "branch": "[parameters('websiteBranch')]"
-          },
-          "dependsOn": [ "[resourceId('Microsoft.Web/serverfarms', parameters('hostingPlanName'))]" ] 
-        }
+            "branch": "[parameters('websiteBranch')]",
+            "siteConfig": {
+              "appSettings": [
+                {
+                  "name": "StorageConnectionString",
+                  "value": "[concat('DefaultEndpointsProtocol=https;AccountName=',parameters('storageName'),';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('storageName')), '2015-05-01-preview').key1)]"
+                }]
+              }
+            },
+            "dependsOn": [ "[resourceId('Microsoft.Web/serverfarms', parameters('hostingPlanName'))]" ]
+          }
       ] 
     },
     {
