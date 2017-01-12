@@ -16,6 +16,18 @@
         },
         "functionBranch": {
             "value": "master"
+        },
+        "functionHostingPlanName": {
+            "value": "DdhpTestFunctionPlan"
+        },
+        "websiteName": {
+            "value": "DdhpCoreTest"
+        },
+        "websiteRepo": {
+            "value": "https://github.com/doogiecup/ddhpcore"
+        },
+        "websiteBranch": {
+            "value": "master"
         }
     }
 }
