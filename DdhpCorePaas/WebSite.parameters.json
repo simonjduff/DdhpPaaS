@@ -12,7 +12,7 @@
             "value": "DdhpTestFunctions"
         },
         "functionRepo": {
-            "value": "https://github.com/DoogieCup/DdhpFunctions"
+            "value": "https://github.com/doogiecup/DdhpFunctions"
         },
         "functionBranch": {
             "value": "master"
