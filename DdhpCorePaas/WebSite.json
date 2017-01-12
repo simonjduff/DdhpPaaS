@@ -33,26 +33,29 @@
     "functionName": {
       "type": "string",
       "minLength": 1
-    }
+    },
+    "functionRepo": {
+      "type": "string",
+      "minLength": 1
+    },
+    "functionBranch": {
+      "type": "string",
+      "minLength": 1  
+    } 
   },
   "variables": {
     "webSiteName": "[concat('webSite', uniqueString(resourceGroup().id))]"
   },
   "resources": [
     {
-      "apiVersion": "2015-08-01",
-      "name": "[parameters('hostingPlanName')]",
       "type": "Microsoft.Web/serverfarms",
+      "apiVersion": "2015-04-01",
+      "name": "[parameters('hostingPlanName')]",
       "location": "[resourceGroup().location]",
-      "tags": {
-        "displayName": "HostingPlan"
-      },
-      "sku": {
-        "name": "[parameters('skuName')]",
-        "capacity": "[parameters('skuCapacity')]"
-      },
       "properties": {
-        "name": "[parameters('hostingPlanName')]"
+        "name": "[parameters('hostingPlanName')]",
+        "computeMode": "Dynamic",
+        "sku": "Dynamic"
       }
     },
     {
@@ -102,7 +105,21 @@
           ]
         },
         "clientAffinityEnabled": false
-      }
+      },
+      "resources": [
+        {
+          "apiVersion": "2015-04-01",
+          "name": "web",
+          "type": "sourcecontrols",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/Sites', parameters('functionName'))]"
+          ],
+          "properties": {
+            "RepoUrl": "[parameters('functionRepo')]",
+            "branch": "[parameters('functionBranch')]"
+          }
+        }
+      ] 
     }
   ]
 }
