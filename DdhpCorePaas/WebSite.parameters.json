@@ -28,6 +28,15 @@
         },
         "websiteBranch": {
             "value": "master"
+        },
+        "statsFunctionName": {
+            "value": "DdhpStatsFunctions"
+        },
+        "statsFunctionRepo": {
+            "value": "https://github.com/DoogieCup/stats_functions"
+        },
+        "statsFunctionBranch": {
+            "value": "master"
         }
     }
 }
