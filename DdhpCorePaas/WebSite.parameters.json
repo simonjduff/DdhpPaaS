@@ -1,42 +1,51 @@
 {
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
-    "parameters": {
-        "hostingPlanName": {
-            "value": "DdhpTestPlan"
-        },
-        "storageName": {
-            "value": "ddhpteststorage"
-        },
-        "functionName": {
-            "value": "DdhpTestFunctions"
-        },
-        "functionRepo": {
-            "value": "https://github.com/doogiecup/DdhpFunctions"
-        },
-        "functionBranch": {
-            "value": "master"
-        },
-        "functionHostingPlanName": {
-            "value": "DdhpTestFunctionPlan"
-        },
-        "websiteName": {
-            "value": "DdhpCoreTest"
-        },
-        "websiteRepo": {
-            "value": "https://github.com/doogiecup/ddhpcore"
-        },
-        "websiteBranch": {
-            "value": "master"
-        },
-        "statsFunctionName": {
-            "value": "DdhpStatsFunctions"
-        },
-        "statsFunctionRepo": {
-            "value": "https://github.com/DoogieCup/stats_functions"
-        },
-        "statsFunctionBranch": {
-            "value": "master"
-        }
+  "parameters": {
+    "hostingPlanName": {
+      "value": "DdhpTestPlan"
+    },
+    "storageName": {
+      "value": "ddhpteststorage"
+    },
+    "functionName": {
+      "value": "DdhpTestFunctions"
+    },
+    "functionRepo": {
+      "value": "https://github.com/doogiecup/DdhpFunctions"
+    },
+    "functionBranch": {
+      "value": "master"
+    },
+    "functionHostingPlanName": {
+      "value": "DdhpTestFunctionPlan"
+    },
+    "websiteName": {
+      "value": "DdhpCoreTest"
+    },
+    "websiteRepo": {
+      "value": "https://github.com/doogiecup/ddhpcore"
+    },
+    "websiteBranch": {
+      "value": "master"
+    },
+    "statsFunctionName": {
+      "value": "DdhpStatsFunctions"
+    },
+    "statsFunctionRepo": {
+      "value": "https://github.com/simonjduff/stats_functions"
+    },
+    "statsFunctionBranch": {
+      "value": "master"
+    },
+    "seasonFunctionName": {
+      "value": "DdhpSeasonFunctions"
+    },
+    "seasonFunctionRepo": {
+      "value": "https://github.com/simonjduff/season-functions"
+    },
+    "seasonFunctionBranch": {
+      "value": "master"
     }
+  }
 }
